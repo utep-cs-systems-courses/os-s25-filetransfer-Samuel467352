@@ -1,0 +1,18 @@
+import os, sys
+
+start = os.read(0, 6)
+
+while start != b"":
+    title = os.read(0, int(start)).decode()
+
+    fd = os.open(title + '3', os.O_CREAT | os.O_WRONLY)
+
+    amount = os.read(0, 6).decode()
+
+    contents = os.read(0, int(amount))
+
+    os.write(fd, contents)
+
+    os.close(fd)
+
+    start = os.read(0, 6)
